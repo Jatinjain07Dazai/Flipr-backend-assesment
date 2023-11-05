@@ -17,6 +17,8 @@ shipping = defaultdict()
 customer_count =set()
 purchase_count = set()
 
+count_c, count_o = 0, 0
+count_g = 0
 
 def id_genrator():
 	return "".join([str(randint(0,99)) for i in range(15)])
@@ -42,7 +44,7 @@ class Purchase(BaseModel):
 class Shipping(BaseModel):
 	Address: str
 	City: str
-	Pincode: int = Field(min_length=5, max_length=5) 
+	Pincode: str = Field(min_length=5, max_length=5) 
 	City:str
 	Purchase_id:str=Field(None)
 	customer_id:str=Field(None)
@@ -50,11 +52,52 @@ class Shipping(BaseModel):
 
 @app.get("/")
 def index():
-	return customer
+	return [customer, purchase]
 
 
-count_c, count_o = 0, 0
-count_g = 0
+@app.get("/shippment/{city}")
+def fetch_ship(city:str):
+	output = []
+	for i in shipping:
+		if shipping[i].City == city:
+			output.append(shipping[i])
+	return output
+
+
+@app.get("/Cust_prod/")
+def fetch_cust_prod():
+	output = []
+	for i in customer:
+		block=customer[i]
+		find = customer[i].customer_id
+		for j in purchase:
+			prod = []
+			if purchase[j].customer_id == find:
+				prod.append(purchase[j])
+		block["purchaseOrder"] = prod
+	output.append(block)
+	return output
+
+
+
+
+@app.get("/deep_report/")
+def fetch_all():
+	output = []
+	for i in customer:
+		block=customer[i]
+		find = customer[i].customer_id
+		for j in purchase:
+			prod = []
+			if purchase[j].customer_id == find:
+				prod.append(purchase[j])
+		block["purchaseOrder"] = prod
+	output.append(block)
+	return output
+
+
+
+
 
 @app.post("/create_customer")
 def create_customer(custom:Customer):
@@ -79,9 +122,16 @@ def place_order(order:Purchase):
 
 
 
+
+
+
 @app.post("/ship_product")
 def ship_product(ship:Shipping):
-	if ship.Purchase_id in purchase_count and ship.customer_id in customer_count:
+	if ship.customer_id in customer_count:
+		for i in customer:
+			if customer[i].customer_id == ship.customer_id:
+				return customer[i]
+
 		global count_g
 		count_g += 1
 		shipping[count_g] = ship
