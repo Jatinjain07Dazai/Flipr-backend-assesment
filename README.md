@@ -17,6 +17,8 @@ Project Snapshots :-
 ![image](https://github.com/Jatinjain07Dazai/Flipr-backend-assesment/assets/72065165/d2f9d08f-af33-4f81-83e9-090d265dea2e)
 ![image](https://github.com/Jatinjain07Dazai/Flipr-backend-assesment/assets/72065165/dd6618cb-6a81-409d-847d-4f2bc7fc0458)
 ![image](https://github.com/Jatinjain07Dazai/Flipr-backend-assesment/assets/72065165/752053b4-13e4-4a5a-b198-c3e1f4e87c14)
+![image](https://github.com/Jatinjain07Dazai/Flipr-backend-assesment/assets/72065165/b2e4b210-7572-42a4-955c-6a263b9d1fa6)
+
 
 
 ## Packages Needed ==>
