@@ -90,10 +90,16 @@ def fetch_all():
 		for j in purchase:
 			prod = []
 			if purchase[j].customer_id == find:
-				prod.append(purchase[j])
+				temp = purchase[j]
+				for k in shipping:
+					if temp.purchase_id == shipping[k].Purchase_id:
+						temp["ShipmentDetail"] = shipping[k]
+						prod.append(temp)
+						break
 		block["purchaseOrder"] = prod
 	output.append(block)
 	return output
+
 
 
 
@@ -127,14 +133,12 @@ def place_order(order:Purchase):
 
 @app.post("/ship_product")
 def ship_product(ship:Shipping):
-	if ship.customer_id in customer_count:
+	if ship.customer_id in customer_count and ship.Purchase_id in purchase_count:
 		for i in customer:
 			if customer[i].customer_id == ship.customer_id:
+				global count_g
+				count_g += 1
+				shipping[count_g] = ship
 				return customer[i]
-
-		global count_g
-		count_g += 1
-		shipping[count_g] = ship
-		return {'Passed': 'True'}
-	else:
-		return {'Unidentified': 'object'}
+		else:
+			return {'Unidentified': 'object'}
