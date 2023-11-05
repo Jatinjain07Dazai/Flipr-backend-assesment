@@ -19,7 +19,26 @@ Project Snapshots :-
 ![image](https://github.com/Jatinjain07Dazai/Flipr-backend-assesment/assets/72065165/752053b4-13e4-4a5a-b198-c3e1f4e87c14)
 
 
-Packages Needed ==>
+## Packages Needed ==>
+
+annotated-types==0.6.0
+anyio==3.7.1
+click==8.1.7
+colorama==0.4.6
+exceptiongroup==1.1.3
+fastapi==0.104.1
+h11==0.14.0
+idna==3.4
+pydantic==2.4.2
+pydantic_core==2.10.1
+sniffio==1.3.0
+starlette==0.27.0
+typing_extensions==4.8.0
+uvicorn==0.24.0
+
+
+# * Due to short deadline unable to host it online kindly run it on localhost.*
+
 
 
 
